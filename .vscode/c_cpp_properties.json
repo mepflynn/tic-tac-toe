@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${default}",
-                "C:\\Users\\maxfl\\Documents\\VS_Code_Projects\\CPP_Practice\\tic_tac_OOP\\"
+                "C:\\Users\\maxfl\\Documents\\VS_Code_Projects\\CPP_Practice\\tic-tac-toe\\"
             ],
             "defines": [
                 "_DEBUG",
