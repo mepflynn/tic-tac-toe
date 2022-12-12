@@ -22,10 +22,10 @@ namespace tictactoe {
 
             // The play has already been validated
             // Make a play onto the game board
-            bool makePlay(int playPosition);
+            bool makePlay(int playPos);
 
             // Is this play invalid? (playing on an open, valid space)
-            bool isPlayValid();
+            bool isPlayValid(int playPos);
 
             // Switch turns to the over player (x->o, o->x)
             void switchTurns();
