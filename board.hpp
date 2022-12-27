@@ -18,7 +18,7 @@ namespace tictactoe {
             // Check for rows of three, which would 
             // mean one of the players has one
             // Also look for tie game (all spaces full)
-            bool gameIsOver();
+            string gameIsOver();
 
             // The play has already been validated
             // Make a play onto the game board

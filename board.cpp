@@ -36,14 +36,14 @@ namespace tictactoe{
     // mean one of the players has won
     // Also look for tie game (all spaces full)
     ///TODO: Alter this fcn to take 'currentTurn' as an input instead, making it more flexible
-    bool board::gameIsOver() {
+    string board::gameIsOver() {
         int row = 0; int col = 1;
 
         // Check each row
         for (int row = 0; row <= 6; row += 3) {
             if (gameBoard[row] == currentTurn && gameBoard[row + 1] == currentTurn && gameBoard[row + 2] == currentTurn) {
                 // Win condition detected
-                return true;
+                return to_string(currentTurn);
             }
         }
 
@@ -51,21 +51,30 @@ namespace tictactoe{
         for (int col = 0; col <= 2; col++) {
             if (gameBoard[col] == currentTurn && gameBoard[col + 3] == currentTurn && gameBoard[col + 6] == currentTurn) {
                 // Win condition detected
-                return true;
+                return to_string(currentTurn);
             }
         }
 
         // Check both diagonals
         if (gameBoard[0] == currentTurn && gameBoard[4] == currentTurn && gameBoard[8] == currentTurn) {
             // Win condition detected
-            return true;
+            return to_string(currentTurn);
         } else if (gameBoard[2] == currentTurn && gameBoard[4] == currentTurn && gameBoard[6] == currentTurn) {
             // Win condition detected
-            return true;
+            return to_string(currentTurn);
         }
 
-        // No win conditions detected for current player's turn
-        return false;
+        for (int i = 0; i <= 8; i++) {
+            // If a blank space is found, game is not tied
+            if (gameBoard[i] == ' ') break;
+
+            // No blanks found, final space reached, game is therefore tied
+            if (i == 8) return "tie";
+        }
+
+        // No win conditions or ties detected for current player's turn
+        // return a space character as a string
+        return "game_not_over";
         
     }
 
