@@ -40,6 +40,9 @@ namespace tictactoe {
             // 4 | 5 | 6
             // 7 | 8 | 9
 
+            // Show the above positional numbers for user reference
+            void displayKey();
+
             // Take a move input on cmd line, return the int
             // return -1 for invalid inputs
             int moveInput();

@@ -32,10 +32,40 @@ namespace tictactoe{
 
     // Gameplay and rules functions //////////////////////////
 
-    // Check for rows of three, which would 
-    // mean one of the players has one
+    // Check for runs (row,col,diag) of three, which would 
+    // mean one of the players has won
     // Also look for tie game (all spaces full)
+    ///TODO: Alter this fcn to take 'currentTurn' as an input instead, making it more flexible
     bool board::gameIsOver() {
+        int row = 0; int col = 1;
+
+        // Check each row
+        for (int row = 0; row <= 6; row += 3) {
+            if (gameBoard[row] == currentTurn && gameBoard[row + 1] == currentTurn && gameBoard[row + 2] == currentTurn) {
+                // Win condition detected
+                return true;
+            }
+        }
+
+        // Check each column
+        for (int col = 0; col <= 2; col++) {
+            if (gameBoard[col] == currentTurn && gameBoard[col + 3] == currentTurn && gameBoard[col + 6] == currentTurn) {
+                // Win condition detected
+                return true;
+            }
+        }
+
+        // Check both diagonals
+        if (gameBoard[0] == currentTurn && gameBoard[4] == currentTurn && gameBoard[8] == currentTurn) {
+            // Win condition detected
+            return true;
+        } else if (gameBoard[2] == currentTurn && gameBoard[4] == currentTurn && gameBoard[6] == currentTurn) {
+            // Win condition detected
+            return true;
+        }
+
+        // No win conditions detected for current player's turn
+        return false;
         
     }
 
