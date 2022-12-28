@@ -150,4 +150,9 @@ namespace tictactoe{
             }
         } while (true);
     }
+
+    // get currentTurn variable as string
+    string board::whoseTurn() {
+        return to_string(currentTurn);
+    }
 }

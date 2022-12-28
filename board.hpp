@@ -47,6 +47,9 @@ namespace tictactoe {
             // return -1 for invalid inputs
             int moveInput();
 
+            // get the 'currentTurn' var as string
+            string whoseTurn();
+
 
 
 
