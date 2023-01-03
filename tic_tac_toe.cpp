@@ -8,30 +8,7 @@
 using namespace tictactoe;
 using namespace std;
 
-int main(int argc, char* argv) {
-    // MODES:
-    // 0 - normal mode (blank board, both human players)
-    //
-    // 1 - CPU mode (blank board, robot opponent)
-    //
-    // 2 - partial start (input an in-progress board, both human players)
-    //
-    // 3 - partial against CPU (in-progress board, against robot opponent)
-
-    ///TODO: Currently only implementing normal mode
-
-    int gameMode = argc;
-
-    
-    if (gameMode == 0) {
-        // NORMAL MODE
-        normalMode();
-    } else {
-        cout << "NOT YET IMPLEMENTED OR INVALID MODE #, EXITING" << endl;
-        return 1;
-    }
-
-}
+// GAME PLAY MODES /////////////////////////////////////////////////////////////////
 
 void normalMode() {
     // Initialize an empty gameboard
@@ -68,11 +45,55 @@ void normalMode() {
         // Did that move end the game?
         gameState = gameBoard.gameIsOver();
         
-        if (gameState == "")
+        if (gameState == "x") {
+            cout << "Player x wins! Suck on them eggs, player o." << endl;
+            return;
+        } else if (gameState == "o") {
+            cout << "Player o wins! Pucker up, player x." << endl;
+            return;
+        } else if (gameState == "tie") {
+            cout << "Tie game! So, ultimately, you both lose." << endl;
+            return;
+        } else if (gameState == "game_not_over") {
+            // Switch turns and re-loop
+            gameBoard.switchTurns();
+        } else {
+            cout << "Error: Gamestate not recognized. Look for bug in gameIsOver(). Exiting." << endl;
+            return;
+        }
         
-    }   
+    }
+}   
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    // HELPER FUNCTIONS ////////////////////////////////////////////////////////////
+
+
     
 
+int main(int argc, char** argv) {
+    // MODES:
+    // 0 - normal mode (blank board, both human players)
+    //
+    // 1 - CPU mode (blank board, robot opponent)
+    //
+    // 2 - partial start (input an in-progress board, both human players)
+    //
+    // 3 - partial against CPU (in-progress board, against robot opponent)
+
+    ///TODO: Currently only implementing normal mode
+
+    // First argument denotes gamemode choice
+    int gameMode = stoi(argv[1]);
+
+    
+    if (gameMode == 0) {
+        // NORMAL MODE
+        normalMode();
+    } else {
+        cout << "NOT YET IMPLEMENTED OR INVALID MODE #, EXITING" << endl;
+        return 1;
+    }
+
 }
-
-

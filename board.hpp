@@ -1,6 +1,7 @@
 using namespace std;
 
 #include <vector>
+#include <string>
 
 namespace tictactoe {
     class board {
@@ -22,7 +23,7 @@ namespace tictactoe {
 
             // The play has already been validated
             // Make a play onto the game board
-            bool makePlay(int playPos);
+            void makePlay(int playPos);
 
             // Is this play invalid? (playing on an open, valid space)
             bool isPlayValid(int playPos);

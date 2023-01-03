@@ -2,6 +2,7 @@
 #include <board.hpp>
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -43,7 +44,7 @@ namespace tictactoe{
         for (int row = 0; row <= 6; row += 3) {
             if (gameBoard[row] == currentTurn && gameBoard[row + 1] == currentTurn && gameBoard[row + 2] == currentTurn) {
                 // Win condition detected
-                return to_string(currentTurn);
+                return string(1, currentTurn);
             }
         }
 
@@ -51,17 +52,17 @@ namespace tictactoe{
         for (int col = 0; col <= 2; col++) {
             if (gameBoard[col] == currentTurn && gameBoard[col + 3] == currentTurn && gameBoard[col + 6] == currentTurn) {
                 // Win condition detected
-                return to_string(currentTurn);
+                return string(1, currentTurn);
             }
         }
 
         // Check both diagonals
         if (gameBoard[0] == currentTurn && gameBoard[4] == currentTurn && gameBoard[8] == currentTurn) {
             // Win condition detected
-            return to_string(currentTurn);
+            return string(1, currentTurn);
         } else if (gameBoard[2] == currentTurn && gameBoard[4] == currentTurn && gameBoard[6] == currentTurn) {
             // Win condition detected
-            return to_string(currentTurn);
+            return string(1, currentTurn);
         }
 
         for (int i = 0; i <= 8; i++) {
@@ -80,7 +81,7 @@ namespace tictactoe{
 
     // The play has already been validated
     // Make a play onto the game board
-    bool board::makePlay(int playPos) {
+    void board::makePlay(int playPos) {
         gameBoard[playPos - 1] = currentTurn;
     }
 
@@ -105,54 +106,68 @@ namespace tictactoe{
     void board::displayBoard() {
 
         cout << "Current game board" << endl;
-        cout << gameBoard[0] << "|" << gameBoard[1] << "|" << gameBoard[2] << endl;
-        cout << "-+-+-" << endl;
-        cout << gameBoard[3] << "|" << gameBoard[4] << "|" << gameBoard[5] << endl;
-        cout << "-+-+-" << endl;        
-        cout << gameBoard[6] << "|" << gameBoard[7] << "|" << gameBoard[8] << endl;   
+        cout << gameBoard[0] << " | " << gameBoard[1] << " | " << gameBoard[2] << endl;
+        cout << "- + - + -" << endl;
+        cout << gameBoard[3] << " | " << gameBoard[4] << " | " << gameBoard[5] << endl;
+        cout << "- + - + -" << endl;        
+        cout << gameBoard[6] << " | " << gameBoard[7] << " | " << gameBoard[8] << endl;   
 
     }
 
     // Show the above positional numbers for user reference
-    void displayKey() {
+    void board::displayKey() {
         cout << "The positions on the board are keyed in this format:" << endl;
-        cout << "1|2|3" << endl;
-        cout << "-+-+-" << endl;
-        cout << "4|5|6" << endl;
-        cout << "-+-+-" << endl;        
-        cout << "7|8|9" << endl;  
+        cout << "1 | 2 | 3" << endl;
+        cout << "- + - + -" << endl;
+        cout << "4 | 5 | 6" << endl;
+        cout << "- + - + -" << endl;        
+        cout << "7 | 8 | 9" << endl;  
     }
 
     // Take a move input on cmd line, return the int
     // return -1 for invalid inputs
     int board::moveInput() {
         
-        int move;
+        string move;
+        int moveNum;
 
         bool valid;
         
         // Loops for repeated input until a valid move is supplied
         // returns that valid move
         do {
-            displayKey();
             displayBoard();
+            cout << endl;
 
             cout << "Please supply a valid input move:" << endl;
             cin >> move;
 
-            valid = isPlayValid(move);
+            // If the player would like to see the key they can type 'key'
+            if (move == "key") {
+                displayKey();
+                cout << endl;
+                continue;
+            }
 
-            if (!valid || move < 1 || move > 9) {
+            moveNum = stoi(move);
+
+            valid = isPlayValid(moveNum);
+
+            if (!valid || moveNum < 1 || moveNum > 9) {
                 cout << "This move is invalid. A valid move must be an integer from 1 to 9 which doesn't overlap an existing play." << endl;
+                displayKey();
+                cout << endl;
             } else {
                 // valid move found
-                return move;
+                // Return this num decremented 1 for use as a vector index
+                return moveNum;
             }
         } while (true);
     }
 
     // get currentTurn variable as string
     string board::whoseTurn() {
-        return to_string(currentTurn);
+        string s(1, currentTurn);
+        return s;
     }
 }
